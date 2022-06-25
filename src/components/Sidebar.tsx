@@ -1,4 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
+import { NoSchemaIntrospectionCustomRule } from "graphql";
+import { BellSimple } from "phosphor-react";
 import { Lesson } from "./Lesson";
 
 const GET_LESSONS_QUERY = gql`
@@ -15,8 +17,18 @@ const GET_LESSONS_QUERY = gql`
 
 
 
+interface GetLessonsQueryResponse {
+  lessons: {
+    id: string;
+    title: string;
+    slug: string;
+    availableAt: string;
+    lessonType: 'live' | 'class';
+  }[]
+}
+
 export function Sidebar() {
-  const { data } = useQuery(GET_LESSONS_QUERY)
+  const { data } = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
 
   console.log(data)
 
@@ -27,12 +39,16 @@ export function Sidebar() {
       </span>
 
       <div className="flex flex-col gap-8">
-        <Lesson
-          title="Aula 01"
-          slug="aula-01"
-          availableAt={new Date()}
-          type="live"
-        />
+        {data?.lessons.map(lesson => {
+          return (
+            <Lesson
+              title={lesson.title}
+              slug="aula-01"
+              availableAt={new Date()}
+              type="live"
+            />
+          )
+        })}
         
       </div>
     </aside>
