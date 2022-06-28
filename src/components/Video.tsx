@@ -1,6 +1,7 @@
 import { DefaultUi, Player, Youtube } from "@vime/react";
 import { CaretRight, DiscordLogo, Download, FileArrowDown, Lightning } from "phosphor-react";
 
+import '@vime/core/themes/default.css';
 
 export function Video() {
   return (
