@@ -36,13 +36,18 @@ interface VideoProps {
 }
 
 export function Video(props: VideoProps) {
-  const { data } = useQuery(GET_LESSONS_BY_SLUG_QUERY, {
+  const { data } = useQuery<GetLessonBySlugResponse>(GET_LESSONS_BY_SLUG_QUERY, {
     variables: {
       slug: props.lessonSlug,
     }
   })
 
-  console.log(data)
+  if (!data) {
+
+    <div className="flex-1">
+      return <p>Carregando...</p>
+    </div>
+  }
   return (
     <div className="flex-1">
       <div className="bg-black flex justify-center">
