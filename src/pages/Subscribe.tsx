@@ -4,10 +4,10 @@ import { Logo } from "../components/Logo";
 
 const CREATE_SUBSCRIBE_MUTATION = gql`
   mutation CreateSubscriber ($name: String!, $email: String!) {
-    createSubscriber(data: {name: "$name", email: "$email"}) {
+    createSubscriber(data: {name: $name, email: $email}) {
       id
     }
-}
+  }
 `
 
 export function Subscribe() {
@@ -17,7 +17,7 @@ export function Subscribe() {
   const [createSubscriber] = useMutation(CREATE_SUBSCRIBE_MUTATION);
 
   function handleSubscribe(event: FormEvent) {
-    event?.preventDefault();
+    event.preventDefault();
 
     createSubscriber({
       variables: {
@@ -26,8 +26,6 @@ export function Subscribe() {
       }
     })
   }
-
-
 
   return (
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
