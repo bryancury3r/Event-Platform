@@ -1,7 +1,7 @@
 import { CheckCircle, Lock } from 'phosphor-react'
 import { isPast, format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface LesseonProps {
   title: string;
@@ -11,6 +11,8 @@ interface LesseonProps {
 }
 
 export function Lesson(props: LesseonProps) {
+  const { slug } = useParams< { slug: string }>()
+
   const isLessonAvailable = isPast(props.availableAt)
   const availableDateFormat = format(props.availableAt, "EEEE' • 'd' de 'MMMM' • 'K'h'mm", {
     locale: ptBR,
