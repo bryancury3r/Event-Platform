@@ -1,6 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import { NoSchemaIntrospectionCustomRule } from "graphql";
-import { BellSimple } from "phosphor-react";
 import { Lesson } from "./Lesson";
 
 const GET_LESSONS_QUERY = gql`
